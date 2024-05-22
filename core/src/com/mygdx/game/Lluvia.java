@@ -27,17 +27,17 @@ public class Lluvia {
         this.gotaMala = gotaMala;
     }
 
-    public void crear() {
+    public void crear(Tarro pj) {
         //rainDropsPos = new Array<Rectangle>();
         //rainDropsType = new Array<Integer>();
     	rainDrops = new Array<>();
-        crearGotaDeLluvia();
+        crearGotaDeLluvia(pj);
         // start the playback of the background music immediately
         rainMusic.setLooping(true);
         rainMusic.play();
     }
 
-    private void crearGotaDeLluvia() {
+    private void crearGotaDeLluvia(Tarro pj) {
         /*Rectangle raindrop = new Rectangle();
         raindrop.x = MathUtils.random(0, 800-64);
         raindrop.y = 480;
@@ -50,11 +50,11 @@ public class Lluvia {
         else 
             rainDropsType.add(2);]*/
     	if (MathUtils.random(1,10)<7) {
-    		GotaBuena rd = new GotaBuena(0, 0, gotaBuena, dropSound);
+    		GotaBuena rd = new GotaBuena(0, (pj.getPuntos() + 250), gotaBuena, dropSound);
     		rainDrops.add(rd);
     	}
     	else {
-    		GotaMala rd = new GotaMala(0, 0, gotaMala);
+    		GotaMala rd = new GotaMala(0, (pj.getPuntos() + 250), gotaMala);
     		rainDrops.add(rd);
     	}
         lastDropTime = TimeUtils.nanoTime();
@@ -62,7 +62,7 @@ public class Lluvia {
 
     public boolean actualizarMovimiento(Tarro tarro) { 
         // generar gotas de lluvia 
-        if(TimeUtils.nanoTime() - lastDropTime > 100000000) crearGotaDeLluvia();
+        if(TimeUtils.nanoTime() - lastDropTime > 100000000) crearGotaDeLluvia(tarro);
 
 
         /*// revisar si las gotas cayeron al suelo o chocaron con el tarro

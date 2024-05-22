@@ -20,7 +20,7 @@ public abstract class Gota implements Movible, Dibujable{
 		raindrop.x = MathUtils.random(0, Gdx.graphics.getWidth()-64);
 		raindrop.y = Gdx.graphics.getHeight();
 		raindrop.height = 64;
-		raindrop.width = 64;
+		raindrop.width = 64;	
 	}
 
 	public abstract void efecto(Tarro pj);
@@ -28,7 +28,7 @@ public abstract class Gota implements Movible, Dibujable{
 	@Override
 	public void actualizarMov() {
 		// TODO Auto-generated method stub
-		raindrop.y -=  300 * Gdx.graphics.getDeltaTime();
+		raindrop.y -=  velY * Gdx.graphics.getDeltaTime();
 		moverX();
 	}
 	

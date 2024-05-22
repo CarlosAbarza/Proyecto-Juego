@@ -46,7 +46,7 @@ public class GameScreen implements Screen {
         tarro.crear();
 
         // creacion de la lluvia
-        lluvia.crear();
+        lluvia.crear(tarro);
     }
 
     @Override
