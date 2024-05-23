@@ -37,7 +37,7 @@ public class GameScreen implements Screen {
         Sound dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
 
         Music rainMusic = Gdx.audio.newMusic(Gdx.files.internal("rain.mp3"));
-        lluvia = new Lluvia(gota, gotaMala, dropSound, rainMusic);
+        lluvia = new Lluvia(gota, gotaMala, dropSound, rainMusic, game.getCam().viewportWidth);
 
         // camera
         camera = game.getCam();
@@ -60,6 +60,7 @@ public class GameScreen implements Screen {
         batch.begin();
         //dibujar textos
         font.draw(batch, "Gotas totales: " + tarro.getPuntos(), 5, 475);
+        //font.draw(batch, "Vidas : " + tarro.getVidas(), 670, 475);
         font.draw(batch, "Vidas : " + tarro.getVidas(), 670, 475);
         font.draw(batch, "HighScore : " + game.getHigherScore(), camera.viewportWidth/2-50, 475);
 
@@ -67,7 +68,8 @@ public class GameScreen implements Screen {
             // movimiento del tarro desde teclado
             tarro.actualizarMovimiento();        
             // caida de la lluvia 
-        if (!lluvia.actualizarMovimiento(tarro)) {
+        lluvia.actualizarMovimiento(tarro);
+        if (tarro.getVidas() == 0) {
             //actualizar HigherScore
             if (game.getHigherScore()<tarro.getPuntos())
                 game.setHigherScore(tarro.getPuntos());  

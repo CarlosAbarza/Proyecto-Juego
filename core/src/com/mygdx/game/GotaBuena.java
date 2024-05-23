@@ -7,8 +7,8 @@ import com.badlogic.gdx.math.Rectangle;
 public class GotaBuena extends Gota {
 	private Sound dropSound;
 	
-	public GotaBuena(int velX, int velY, Texture img, Sound dropSound) {
-		super(velX, velY, img);
+	public GotaBuena(int velX, int velY, Texture img, Sound dropSound, float anchoCam) {
+		super(velX, velY, img, anchoCam);
 		this.dropSound = dropSound;
 	}
 
