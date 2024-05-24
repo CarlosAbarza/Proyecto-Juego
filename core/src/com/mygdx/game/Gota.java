@@ -68,4 +68,5 @@ public abstract class Gota implements Dibujable{
 	public Rectangle getArea() {
 		return raindrop;
 	}
+	
 }

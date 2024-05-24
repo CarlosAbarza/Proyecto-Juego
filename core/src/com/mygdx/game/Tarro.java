@@ -12,11 +12,7 @@ import com.badlogic.gdx.math.Rectangle;
 public class Tarro implements Dibujable{
     private Rectangle bucket;
     private Texture bucketImage;
-    private Sound sonidoHerido;
-    // Sacar vida y ptj a una clase jugador o juego
-    private int vidas = 3;
-    private int puntos = 0;
-    
+    private Sound sonidoHerido;    
     private int velx = 400;
     private boolean herido = false;
     private int tiempoHeridoMax=50;
@@ -29,21 +25,10 @@ public class Tarro implements Dibujable{
         sonidoHerido = ss;
         this.anchoCam = anchoCam;
     }
-
-    public int getVidas() {
-        return vidas;
-    }
-
-    public int getPuntos() {
-        return puntos;
-    }
     
+    @Override
     public Rectangle getArea() {
         return bucket;
-    }
-    
-    public void sumarPuntos(int pp) {
-        puntos+=pp;
     }
 
     public void crear() {
