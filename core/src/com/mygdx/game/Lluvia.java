@@ -36,12 +36,12 @@ public class Lluvia {
     }
 
     private void crearGotaDeLluvia(Tarro pj) {
-    	if (MathUtils.random(1,10)<7) {
-    		GotaBuena rd = new GotaBuena(0, (pj.getPuntos() + 250), gotaBuena, dropSound, anchoCam);
+    	if (MathUtils.random(1,10)<9) {
+    		GotaBuena rd = new GotaBuena(MathUtils.random(-150,150), (pj.getPuntos() + 250), gotaBuena, dropSound, anchoCam);
     		rainDrops.add(rd);
     	}
     	else {
-    		GotaMala rd = new GotaMala(0, (pj.getPuntos() + 250), gotaMala, anchoCam);
+    		GotaMala rd = new GotaMala(MathUtils.random(-150,150), (pj.getPuntos() + 250), gotaMala, anchoCam);
     		rainDrops.add(rd);
     	}
         lastDropTime = TimeUtils.nanoTime();

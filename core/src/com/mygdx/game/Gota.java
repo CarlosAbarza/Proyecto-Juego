@@ -37,7 +37,7 @@ public abstract class Gota implements Movible, Dibujable{
 	@Override
 	public void actualizarDibujo(SpriteBatch batch) {
 		// TODO Auto-generated method stub
-		batch.draw(img, raindrop.x, raindrop.y);
+		batch.draw(img, raindrop.x, raindrop.y, 64, 64);
 	}
 	
 	public boolean dentroPantalla() {

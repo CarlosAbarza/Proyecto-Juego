@@ -32,7 +32,7 @@ public class GameScreen implements Screen {
 
         // load the drop sound effect and the rain background "music" 
         Texture gota = new Texture(Gdx.files.internal("drop.png"));
-        Texture gotaMala = new Texture(Gdx.files.internal("dropBad.png"));
+        Texture gotaMala = new Texture(Gdx.files.internal("gotaRoja.png"));
 
         Sound dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
 
@@ -43,7 +43,7 @@ public class GameScreen implements Screen {
         camera = game.getCam();
         batch = new SpriteBatch();
         // creacion del tarro
-        tarro.crear();
+        tarro.crear(game.getCam().viewportWidth);
 
         // creacion de la lluvia
         lluvia.crear(tarro);
@@ -52,7 +52,7 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         //limpia la pantalla con color azul obscuro.
-        ScreenUtils.clear(0, 0, 0.2f, 1);
+        ScreenUtils.clear(0.5f, 0.5f, 0.5f, 1);
         //actualizar matrices de la cámara
         camera.update();
         //actualizar 
@@ -66,7 +66,7 @@ public class GameScreen implements Screen {
 
         if (!tarro.estaHerido()) {
             // movimiento del tarro desde teclado
-            tarro.actualizarMovimiento();        
+            tarro.actualizarMov();        
             // caida de la lluvia 
         lluvia.actualizarMovimiento(tarro);
         if (tarro.getVidas() == 0) {
@@ -79,7 +79,7 @@ public class GameScreen implements Screen {
             }
         }
 
-        tarro.dibujar(batch);
+        tarro.actualizarDibujo(batch);
         lluvia.actualizarDibujoLluvia(batch);
 
         batch.end();
