@@ -105,5 +105,13 @@ public class Tarro implements Dibujable{
     public boolean estaHerido() {
         return herido;
     }
+
+	@Override
+	public boolean colision(Movible obj) {
+		if (bucket.overlaps(obj.getArea())) {
+			return true;
+		}
+		return false;
+	}
 	   
 }

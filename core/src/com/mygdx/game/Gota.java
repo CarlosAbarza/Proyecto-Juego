@@ -56,11 +56,16 @@ public abstract class Gota implements Dibujable{
 		raindrop.x += velX * Gdx.graphics.getDeltaTime();
 	}
 	
-	public boolean colision(Jugador pj) {
-		if (raindrop.overlaps(pj.getPj().getArea())) {
-			efecto(pj);
+	@Override
+	public boolean colision(Movible pj) {
+		if (raindrop.overlaps(pj.getArea())) {
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public Rectangle getArea() {
+		return raindrop;
 	}
 }

@@ -27,21 +27,21 @@ public class Lluvia {
         this.anchoCam = anchoCam;
     }
 
-    public void crear(Tarro pj) {
+    public void crear() {
     	rainDrops = new Array<>();
-        crearGotaDeLluvia(pj);
+        crearGotaDeLluvia(0);
         // start the playback of the background music immediately
         rainMusic.setLooping(true);
         rainMusic.play();
     }
 
-    private void crearGotaDeLluvia(Tarro pj) {
+    private void crearGotaDeLluvia(int ptj) {
     	if (MathUtils.random(1,10)<9) {
-    		GotaBuena rd = new GotaBuena(MathUtils.random(-150,150), (pj.getPuntos() + 250), gotaBuena, dropSound, anchoCam);
+    		GotaBuena rd = new GotaBuena(MathUtils.random(-150,150), (ptj + 250), gotaBuena, dropSound, anchoCam);
     		rainDrops.add(rd);
     	}
     	else {
-    		GotaMala rd = new GotaMala(MathUtils.random(-150,150), (pj.getPuntos() + 250), gotaMala, anchoCam);
+    		GotaMala rd = new GotaMala(MathUtils.random(-150,150), (ptj + 250), gotaMala, anchoCam);
     		rainDrops.add(rd);
     	}
         lastDropTime = TimeUtils.nanoTime();
@@ -49,7 +49,7 @@ public class Lluvia {
 
     public void actualizarMovimiento(Jugador pj) { 
         // generar gotas de lluvia 
-        if(TimeUtils.nanoTime() - lastDropTime > 100000000) crearGotaDeLluvia(pj.getPj());
+        if(TimeUtils.nanoTime() - lastDropTime > 100000000) crearGotaDeLluvia(pj.getPtj());
 
         for (int i = 0; i < rainDrops.size; i++) {
         	Gota rd = rainDrops.get(i);
@@ -57,7 +57,8 @@ public class Lluvia {
         	if (!rd.dentroPantalla()) {
         		rainDrops.removeIndex(i);
         	}
-        	if (rd.colision(pj)) {
+        	if (rd.colision(pj.getPj())) {
+        		rd.efecto(pj);
         		rainDrops.removeIndex(i);
         	}
         }

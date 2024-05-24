@@ -38,4 +38,16 @@ public class Shield implements Dibujable {
 	public void resetTime() {
 		timeLeft = timeMax;
 	}
+
+	@Override
+	public boolean colision(Movible obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Rectangle getArea() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

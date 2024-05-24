@@ -43,10 +43,10 @@ public class GameScreen implements Screen {
         camera = game.getCam();
         batch = new SpriteBatch();
         // creacion del tarro
-        // tarro.crear();
+        pj.crear();
 
         // creacion de la lluvia
-        lluvia.crear(pj.getPj());
+        lluvia.crear();
     }
 
     @Override

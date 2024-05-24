@@ -28,6 +28,10 @@ public class Jugador {
 		return pj;
 	}
 	
+	public void crear() {
+		pj.crear();
+	}
+	
 	public void sumarPuntos(int pp) {
 		ptj += pp;
 	}
