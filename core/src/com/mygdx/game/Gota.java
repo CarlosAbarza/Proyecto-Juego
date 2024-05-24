@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
-public abstract class Gota implements Movible, Dibujable{
+public abstract class Gota implements Dibujable{
 	protected int velX;
 	protected int velY;
 	protected Texture img;
@@ -40,6 +40,7 @@ public abstract class Gota implements Movible, Dibujable{
 		batch.draw(img, raindrop.x, raindrop.y, 64, 64);
 	}
 	
+	@Override
 	public boolean dentroPantalla() {
 		if (raindrop.y + 64 < 0) {
 			return false;
@@ -47,19 +48,12 @@ public abstract class Gota implements Movible, Dibujable{
 		return true;
 	}
 
-	public void moverX() {
+	protected void moverX() {
 		if (raindrop.x > (anchoCam-64) ||
 			raindrop.x < 0) {
 			velX *= -1;
 		}
 		raindrop.x += velX * Gdx.graphics.getDeltaTime();
-	}
-	
-	public boolean verificarH() {
-		if (raindrop.y + 64 < 0) {
-			return false;
-		}
-		return true;
 	}
 	
 	public boolean colision(Tarro pj) {

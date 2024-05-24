@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
 
-public class Tarro implements Dibujable, Movible{
+public class Tarro implements Dibujable{
     private Rectangle bucket;
     private Texture bucketImage;
     private Sound sonidoHerido;
@@ -19,11 +19,13 @@ public class Tarro implements Dibujable, Movible{
     private boolean herido = false;
     private int tiempoHeridoMax=50;
     private int tiempoHerido;
+    private float anchoCam;
 
 
-    public Tarro(Texture tex, Sound ss) {
+    public Tarro(Texture tex, Sound ss, float anchoCam) {
         bucketImage = tex;
         sonidoHerido = ss;
+        this.anchoCam = anchoCam;
     }
 
     public int getVidas() {
@@ -42,7 +44,7 @@ public class Tarro implements Dibujable, Movible{
         puntos+=pp;
     }
 
-    public void crear(float anchoCam) {
+    public void crear() {
         bucket = new Rectangle();
         bucket.x = anchoCam / 2 - 64 / 2;
         bucket.y = 20;
@@ -75,8 +77,24 @@ public class Tarro implements Dibujable, Movible{
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) bucket.x -= velx * Gdx.graphics.getDeltaTime();
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) bucket.x += velx * Gdx.graphics.getDeltaTime();
         // que no se salga de los bordes izq y der
-        if(bucket.x < 0) bucket.x = 0;
-        if(bucket.x > 800 - 64) bucket.x = 800 - 64;
+        if(!dentroPantalla()) {
+        	if (bucket.x < 0) {
+        		bucket.x = 0;
+        	}
+        	else {
+        		bucket.x = anchoCam - 64;
+        	}
+        }
+    }
+    
+    @Override
+    public boolean dentroPantalla() {
+    	if (bucket.x < 0) 
+    		return false;
+    	if (bucket.x > anchoCam - 64) {
+    		return false;
+    	}
+    	return true;
     }
 
     public void destruir() {
