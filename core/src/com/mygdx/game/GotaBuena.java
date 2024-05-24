@@ -13,7 +13,7 @@ public class GotaBuena extends Gota {
 	}
 
 	@Override
-	public void efecto(Tarro pj) {
+	public void efecto(Jugador pj) {
 		// TODO Auto-generated method stub
 		pj.sumarPuntos(10);
 		dropSound.play();

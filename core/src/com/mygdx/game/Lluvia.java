@@ -47,9 +47,9 @@ public class Lluvia {
         lastDropTime = TimeUtils.nanoTime();
     }
 
-    public void actualizarMovimiento(Tarro tarro) { 
+    public void actualizarMovimiento(Jugador pj) { 
         // generar gotas de lluvia 
-        if(TimeUtils.nanoTime() - lastDropTime > 100000000) crearGotaDeLluvia(tarro);
+        if(TimeUtils.nanoTime() - lastDropTime > 100000000) crearGotaDeLluvia(pj.getPj());
 
         for (int i = 0; i < rainDrops.size; i++) {
         	Gota rd = rainDrops.get(i);
@@ -57,7 +57,7 @@ public class Lluvia {
         	if (!rd.dentroPantalla()) {
         		rainDrops.removeIndex(i);
         	}
-        	if (rd.colision(tarro)) {
+        	if (rd.colision(pj)) {
         		rainDrops.removeIndex(i);
         	}
         }

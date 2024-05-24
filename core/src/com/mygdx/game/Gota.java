@@ -25,7 +25,7 @@ public abstract class Gota implements Dibujable{
 		this.anchoCam = anchoCam;
 	}
 
-	public abstract void efecto(Tarro pj);
+	public abstract void efecto(Jugador pj);
 	
 	@Override
 	public void actualizarMov() {
@@ -56,8 +56,8 @@ public abstract class Gota implements Dibujable{
 		raindrop.x += velX * Gdx.graphics.getDeltaTime();
 	}
 	
-	public boolean colision(Tarro pj) {
-		if (raindrop.overlaps(pj.getArea())) {
+	public boolean colision(Jugador pj) {
+		if (raindrop.overlaps(pj.getPj().getArea())) {
 			efecto(pj);
 			return true;
 		}

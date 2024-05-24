@@ -10,7 +10,7 @@ public class GotaMala extends Gota {
 	}
 
 	@Override
-	public void efecto(Tarro pj) {
+	public void efecto(Jugador pj) {
 		// TODO Auto-generated method stub
 		pj.dañar();
 	}
