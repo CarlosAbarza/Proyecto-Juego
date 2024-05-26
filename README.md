@@ -36,16 +36,13 @@ Si el proyecto no configura automáticamente las dependencias de libGDX, puedes 
 
 1. Abre el archivo build.gradle ubicado en la raíz del proyecto.
 
-2. Asegúrate de que las dependencias de libGDX estén listadas en la sección dependencies. Por ejemplo:
-
-   ´´´sh
-   gradle
-
-dependencies {
-    compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-    compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
-    compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
-}
-´´´
+2. Asegúrate de que las dependencias de libGDX estén listadas en la sección dependencies.
 
 3. Sincroniza el proyecto con Gradle. Puedes hacerlo haciendo clic derecho en el proyecto en el Explorador de Proyectos y seleccionando Gradle > Refresh Gradle Project.
+
+## Ejecutar el pryecto
+1. En el Explorador de Proyectos, expande el proyecto hasta encontrar la clase principal del módulo desktop.
+
+2. Haz clic derecho en la clase principal, llamada "DesktopLauncher.java", y selecciona Run As > Java Application.
+
+## Listo, disfruta el juego
