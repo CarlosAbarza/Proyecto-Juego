@@ -8,6 +8,7 @@ public class Jugador {
 	private int vidas;
 	private int ptj;
 	private Tarro pj;
+	private Shield esc;
 	
 	private float slowTMax;
 	private float slowTLeft;
@@ -18,8 +19,10 @@ public class Jugador {
 		ptj = 0;
 		slowTMax = 3f;
 		slowTLeft = slowTMax;
+		esc = new Shield(anchoCam);
 		
 		pj.crear();
+		esc.crear();
 	}
 
 	public int getVidas() {
@@ -53,10 +56,14 @@ public class Jugador {
 	
 	public void mover() {
 		pj.actualizarMov();
+		esc.actualizarMov();
 	}
 	
 	public void dibujar(SpriteBatch batch) {
 		pj.actualizarDibujo(batch);
+		if (esc.estado()) 
+			esc.actualizarDibujo(batch);
+		
 	}
 	
 	public void destruir() {
@@ -65,10 +72,12 @@ public class Jugador {
 	
 	public void relentizar() {
 		pj.relentizar();
+		esc.relentizar();
 	}
 	
 	public void acelerar() {
 		pj.acelerar();
+		esc.acelerar();	
 	}
 	
 	public void tiempoSlow(float time) {
@@ -77,7 +86,40 @@ public class Jugador {
 			slowTLeft = 0f;
 	}
 	
-	public float getSlowTime() {
-		return slowTLeft;
+	public String getSlowTime() {
+		String truncatedNumber = String.format("%.2f", slowTLeft);
+        return truncatedNumber;
+	}
+	
+	public boolean puedeSlow() {
+		return (slowTLeft > 0);
+	}
+	
+	public void activarEscudo() {
+		esc.activar();
+	}
+	
+	public void desactivarEscudo() {
+		esc.desactivar();
+	}
+	
+	public boolean estadoEsc() {
+		return esc.estado();
+	}
+	
+	public Shield getShield() {
+		return esc;
+	}
+	
+	public String getShielTime() {
+		return esc.getTimeLeft();
+	}
+	
+	public void usarShield(float time) {
+		esc.usar(time);
+	}
+	
+	public boolean puedeShield() {
+		return esc.puede();
 	}
 }

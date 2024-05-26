@@ -33,13 +33,14 @@ public class GameScreen implements Screen {
         pj = new Jugador(new Texture(Gdx.files.internal("bucket.png")),hurtSound, game.getCam().viewportWidth);
 
         // load the drop sound effect and the rain background "music" 
+        /*
         Texture gota = new Texture(Gdx.files.internal("drop.png"));
         Texture gotaMala = new Texture(Gdx.files.internal("gotaRoja.png"));
-
+*/
         Sound dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
 
         Music rainMusic = Gdx.audio.newMusic(Gdx.files.internal("rain.mp3"));
-        lluvia = new Lluvia(gota, gotaMala, dropSound, rainMusic, game.getCam().viewportWidth);
+        lluvia = new Lluvia(dropSound, rainMusic, game.getCam().viewportWidth);
 
         // camera
         camera = game.getCam();
@@ -62,27 +63,41 @@ public class GameScreen implements Screen {
         batch.begin();
         //dibujar textos
         font.draw(batch, "Gotas totales: " + pj.getPtj(), 5, 475);
-        //font.draw(batch, "Vidas : " + tarro.getVidas(), 670, 475);
         font.draw(batch, "Vidas : " + pj.getVidas(), 670, 475);
         font.draw(batch, "HighScore : " + game.getHigherScore(), camera.viewportWidth/2-50, 475);
         font.draw(batch, "SlowTimeLeft: " + pj.getSlowTime() + " seconds", 10, 450);
+        font.draw(batch, "ShieldTimeLeft: " + pj.getShielTime() + " seconds", 400, 450);
 
         
         if (!pj.estaHerido()) {
             // movimiento del tarro desde teclado
-            pj.mover();        
-            // caida de la lluvia 
-	        lluvia.actualizarMovimiento(pj);
-	        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && pj.getSlowTime() > 0) {
+            pj.mover();    
+            
+            // activar/desactivar habilidades
+            // Camara Lenta
+            if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && pj.puedeSlow()) {
 	        	float deltaTime = Gdx.graphics.getDeltaTime();
 	        	pj.tiempoSlow(deltaTime);
 	        	pj.relentizar();
 	        	lluvia.relentizar();
 	        }
-	        else if (!Gdx.input.isKeyPressed(Input.Keys.SPACE) ||  pj.getSlowTime() == 0) {
+	        else if (!Gdx.input.isKeyPressed(Input.Keys.SPACE) ||  !pj.puedeSlow()) {
 	        	pj.acelerar();
 	        	lluvia.acelerar();
 	        }
+	        // Escudo
+	        if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && pj.puedeShield()) {
+	        	float deltaTime = Gdx.graphics.getDeltaTime();
+	        	pj.usarShield(deltaTime);
+	        	pj.activarEscudo();
+	        }
+	        else if (!Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) || !pj.puedeShield()) {
+	        	pj.desactivarEscudo();
+	        }
+            
+            // caida de la lluvia 
+	        lluvia.actualizarMovimiento(pj);
+	        
 	        if (pj.getVidas() == 0) {
 	            //actualizar HigherScore
 	            if (game.getHigherScore()<pj.getPtj())

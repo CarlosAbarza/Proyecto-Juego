@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
@@ -7,8 +8,8 @@ import com.badlogic.gdx.math.Rectangle;
 public class GotaBuena extends Gota {
 	private Sound dropSound;
 	
-	public GotaBuena(int velX, int velY, Texture img, Sound dropSound, float anchoCam) {
-		super(velX, velY, img, anchoCam);
+	public GotaBuena(int velX, int velY, Sound dropSound, float anchoCam) {
+		super(velX, velY, new Texture(Gdx.files.internal("drop.png")), anchoCam);
 		this.dropSound = dropSound;
 	}
 

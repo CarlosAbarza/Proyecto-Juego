@@ -13,17 +13,17 @@ import com.badlogic.gdx.utils.TimeUtils;
 public class Lluvia {
     private Array<Gota> rainDrops;
 	private long lastDropTime;
+	/*
     private Texture gotaBuena;
     private Texture gotaMala;
+    */
     private Sound dropSound;
     private Music rainMusic;
     private float anchoCam;
 	   
-    public Lluvia(Texture gotaBuena, Texture gotaMala, Sound ss, Music mm, float anchoCam) {
+    public Lluvia(Sound ss, Music mm, float anchoCam) {
         rainMusic = mm;
         dropSound = ss;
-        this.gotaBuena = gotaBuena;
-        this.gotaMala = gotaMala;
         this.anchoCam = anchoCam;
     }
 
@@ -37,11 +37,11 @@ public class Lluvia {
 
     private void crearGotaDeLluvia(int ptj) {
     	if (MathUtils.random(1,10)<9) {
-    		GotaBuena rd = new GotaBuena(MathUtils.random(-150,150), (ptj + 250), gotaBuena, dropSound, anchoCam);
+    		GotaBuena rd = new GotaBuena(MathUtils.random(-150,150), (ptj + 250), dropSound, anchoCam);
     		rainDrops.add(rd);
     	}
     	else {
-    		GotaMala rd = new GotaMala(MathUtils.random(-150,150), (ptj + 250), gotaMala, anchoCam);
+    		GotaMala rd = new GotaMala(MathUtils.random(-150,150), (ptj + 250), anchoCam);
     		rainDrops.add(rd);
     	}
         lastDropTime = TimeUtils.nanoTime();
@@ -57,10 +57,15 @@ public class Lluvia {
         	if (!rd.dentroPantalla()) {
         		rainDrops.removeIndex(i);
         	}
-        	if (rd.colision(pj.getPj())) {
+        	
+        	if (pj.estadoEsc() && rd.colision(pj.getShield())) {
+        		rainDrops.removeIndex(i);
+        	}
+        	else if (rd.colision(pj.getPj())) {
         		rd.efecto(pj);
         		rainDrops.removeIndex(i);
         	}
+        	
         }
     }
 
