@@ -38,13 +38,14 @@ Si el proyecto no configura automáticamente las dependencias de libGDX, puedes 
 
 2. Asegúrate de que las dependencias de libGDX estén listadas en la sección dependencies. Por ejemplo:
 
-    '''gradle
+   ´´´sh
+   gradle
 
 dependencies {
     compile "com.badlogicgames.gdx:gdx:$gdxVersion"
     compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
     compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
 }
-'''
+´´´
 
 3. Sincroniza el proyecto con Gradle. Puedes hacerlo haciendo clic derecho en el proyecto en el Explorador de Proyectos y seleccionando Gradle > Refresh Gradle Project.
