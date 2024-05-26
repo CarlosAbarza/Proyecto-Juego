@@ -30,4 +30,21 @@ git clone https://github.com/CarlosAbarza/Proyecto-Juego.git
 4. Navega hasta el directorio donde clonaste el repositorio y selecciona la carpeta raíz del proyecto.
 5. Haz clic en Finish para importar el proyecto.
 
-### 3. 
+### 3. Configurar las dependencias de libGDX
+
+Si el proyecto no configura automáticamente las dependencias de libGDX, puedes hacerlo manualmente:
+
+1. Abre el archivo build.gradle ubicado en la raíz del proyecto.
+
+2. Asegúrate de que las dependencias de libGDX estén listadas en la sección dependencies. Por ejemplo:
+
+    '''gradle
+
+dependencies {
+    compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+    compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
+    compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+}
+'''
+
+3. Sincroniza el proyecto con Gradle. Puedes hacerlo haciendo clic derecho en el proyecto en el Explorador de Proyectos y seleccionando Gradle > Refresh Gradle Project.
