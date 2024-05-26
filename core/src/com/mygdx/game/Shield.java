@@ -127,4 +127,8 @@ public class Shield implements Dibujable {
 	public boolean puede() {
 		return timeLeft > 0;
 	}
+	
+	public void recarga() {
+		timeLeft = timeMax;
+	}
 }

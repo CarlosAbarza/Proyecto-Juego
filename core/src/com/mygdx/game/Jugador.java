@@ -95,6 +95,10 @@ public class Jugador {
 		return (slowTLeft > 0);
 	}
 	
+	public void recargaSlow() {
+		slowTLeft = slowTMax;
+	}
+	
 	public void activarEscudo() {
 		esc.activar();
 	}
@@ -121,5 +125,9 @@ public class Jugador {
 	
 	public boolean puedeShield() {
 		return esc.puede();
+	}
+	
+	public void recargaShield() {
+		esc.recarga();
 	}
 }
