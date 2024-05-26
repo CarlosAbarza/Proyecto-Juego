@@ -20,7 +20,7 @@ Clona el repositorio del proyecto desde GitHub a tu máquina local:
 
 ```sh
 git clone https://github.com/CarlosAbarza/Proyecto-Juego.git
-```sh
+sh```
 
 ### 2. Importar el proyecto en Eclipse
 
