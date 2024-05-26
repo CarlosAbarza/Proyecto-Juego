@@ -9,10 +9,16 @@ public class Jugador {
 	private int ptj;
 	private Tarro pj;
 	
+	private float slowTMax;
+	private float slowTLeft;
+	
 	public Jugador(Texture tex, Sound ss, float anchoCam) {
 		pj = new Tarro(tex, ss, anchoCam);
 		vidas = 3;
 		ptj = 0;
+		slowTMax = 3f;
+		slowTLeft = slowTMax;
+		
 		pj.crear();
 	}
 
@@ -55,5 +61,23 @@ public class Jugador {
 	
 	public void destruir() {
 		pj.destruir();
+	}
+	
+	public void relentizar() {
+		pj.relentizar();
+	}
+	
+	public void acelerar() {
+		pj.acelerar();
+	}
+	
+	public void tiempoSlow(float time) {
+		slowTLeft -= time;
+		if (slowTLeft < 0) 
+			slowTLeft = 0f;
+	}
+	
+	public float getSlowTime() {
+		return slowTLeft;
 	}
 }

@@ -7,4 +7,6 @@ public interface Movible {
 	public boolean dentroPantalla();
 	public boolean colision(Movible obj);
 	public Rectangle getArea();
+	public void acelerar();
+	public void relentizar();
 }

@@ -71,6 +71,20 @@ public class Lluvia {
     	}
     }
     
+    public void acelerar() {
+    	for (int i = 0; i < rainDrops.size; i++) {
+    		Gota rd = rainDrops.get(i);
+    		rd.acelerar();
+    	}
+    }
+    
+    public void relentizar() {
+    	for (int i = 0; i < rainDrops.size; i++) {
+    		Gota rd = rainDrops.get(i);
+    		rd.relentizar();
+    	}
+    }
+    
     public void destruir() {
         dropSound.dispose();
         rainMusic.dispose();

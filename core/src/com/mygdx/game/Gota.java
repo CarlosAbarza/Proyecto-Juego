@@ -12,6 +12,9 @@ public abstract class Gota implements Dibujable{
 	protected Texture img;
 	protected Rectangle raindrop;
 	protected float anchoCam;
+	
+	// temporal
+	protected boolean relentizado;
 
 	public Gota(int velX, int velY, Texture img, float anchoCam) {
 		this.velX = velX;
@@ -23,6 +26,8 @@ public abstract class Gota implements Dibujable{
 		raindrop.height = 64;
 		raindrop.width = 64;	
 		this.anchoCam = anchoCam;
+		relentizado = false;
+		
 	}
 
 	public abstract void efecto(Jugador pj);
@@ -69,4 +74,21 @@ public abstract class Gota implements Dibujable{
 		return raindrop;
 	}
 	
+	@Override
+	public void acelerar() {
+		if (relentizado) {
+			velX *= 2;
+			velY *= 2;
+			relentizado = false; 
+		}
+	}
+	
+	@Override
+	public void relentizar() {
+		if (!relentizado) {
+			velX /= 2;
+			velY /= 2;
+			relentizado = true;
+		}
+	}
 }

@@ -13,17 +13,21 @@ public class Tarro implements Dibujable{
     private Rectangle bucket;
     private Texture bucketImage;
     private Sound sonidoHerido;    
-    private int velx = 400;
+    private int velX = 400;
     private boolean herido = false;
     private int tiempoHeridoMax=50;
     private int tiempoHerido;
     private float anchoCam;
+    
+    // temporal
+    private boolean relentizado;
 
 
     public Tarro(Texture tex, Sound ss, float anchoCam) {
         bucketImage = tex;
         sonidoHerido = ss;
         this.anchoCam = anchoCam;
+        relentizado = false;
     }
     
     @Override
@@ -60,8 +64,8 @@ public class Tarro implements Dibujable{
     @Override
     public void actualizarMov() { 
         //movimiento desde teclado
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) bucket.x -= velx * Gdx.graphics.getDeltaTime();
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) bucket.x += velx * Gdx.graphics.getDeltaTime();
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) bucket.x -= velX * Gdx.graphics.getDeltaTime();
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) bucket.x += velX * Gdx.graphics.getDeltaTime();
         // que no se salga de los bordes izq y der
         if(!dentroPantalla()) {
         	if (bucket.x < 0) {
@@ -97,6 +101,22 @@ public class Tarro implements Dibujable{
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void acelerar() {
+		if (relentizado) {
+			velX *= 2;
+			relentizado = false;
+		}
+	}
+
+	@Override
+	public void relentizar() {
+		if (!relentizado) {
+			velX /= 2; 
+			relentizado = true;
+		}
 	}
 	   
 }

@@ -50,4 +50,16 @@ public class Shield implements Dibujable {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void acelerar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void relentizar() {
+		// TODO Auto-generated method stub
+		
+	}
 }

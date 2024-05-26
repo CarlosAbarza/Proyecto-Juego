@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -25,6 +26,7 @@ public class GameScreen implements Screen {
         this.game = game;
         this.batch = game.getBatch();
         this.font = game.getFont();
+        
         
         // load the images for the droplet and the bucket, 64x64 pixels each 	     
         Sound hurtSound = Gdx.audio.newSound(Gdx.files.internal("hurt.ogg"));
@@ -63,12 +65,24 @@ public class GameScreen implements Screen {
         //font.draw(batch, "Vidas : " + tarro.getVidas(), 670, 475);
         font.draw(batch, "Vidas : " + pj.getVidas(), 670, 475);
         font.draw(batch, "HighScore : " + game.getHigherScore(), camera.viewportWidth/2-50, 475);
+        font.draw(batch, "SlowTimeLeft: " + pj.getSlowTime() + " seconds", 10, 450);
 
+        
         if (!pj.estaHerido()) {
             // movimiento del tarro desde teclado
             pj.mover();        
             // caida de la lluvia 
 	        lluvia.actualizarMovimiento(pj);
+	        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && pj.getSlowTime() > 0) {
+	        	float deltaTime = Gdx.graphics.getDeltaTime();
+	        	pj.tiempoSlow(deltaTime);
+	        	pj.relentizar();
+	        	lluvia.relentizar();
+	        }
+	        else if (!Gdx.input.isKeyPressed(Input.Keys.SPACE) ||  pj.getSlowTime() == 0) {
+	        	pj.acelerar();
+	        	lluvia.acelerar();
+	        }
 	        if (pj.getVidas() == 0) {
 	            //actualizar HigherScore
 	            if (game.getHigherScore()<pj.getPtj())
