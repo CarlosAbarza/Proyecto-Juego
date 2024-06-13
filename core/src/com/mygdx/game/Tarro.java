@@ -9,7 +9,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
 
-public class Tarro implements Dibujable{
+public final class Tarro implements Dibujable{
+	private static Tarro instance;
     private Rectangle bucket;
     private Texture bucketImage;
     private Sound sonidoHerido;    
@@ -23,11 +24,18 @@ public class Tarro implements Dibujable{
     private boolean relentizado;
 
 
-    public Tarro(Texture tex, Sound ss, float anchoCam) {
+    private Tarro(Texture tex, Sound ss, float anchoCam) {
         bucketImage = tex;
         sonidoHerido = ss;
         this.anchoCam = anchoCam;
         relentizado = false;
+    }
+    
+    public static Tarro getTarro(float anchoCam) {
+    	if (instance == null) {
+    		instance = new Tarro(new Texture(Gdx.files.internal("bucket.png")),Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")), anchoCam);
+    	}
+    	return instance;
     }
     
     @Override
@@ -89,6 +97,7 @@ public class Tarro implements Dibujable{
 
     public void destruir() {
         bucketImage.dispose();
+        instance = null;
     }
 	
     public boolean estaHerido() {

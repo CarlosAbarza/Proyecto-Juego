@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -20,11 +22,17 @@ public class Lluvia {
     private Sound dropSound;
     private Music rainMusic;
     private float anchoCam;
+    private ArrayList<MovimientoGota> movs;
 	   
     public Lluvia(Sound ss, Music mm, float anchoCam) {
         rainMusic = mm;
         dropSound = ss;
         this.anchoCam = anchoCam;
+        
+        movs = new ArrayList<>();
+        movs.add(new CaidaRecta());
+        movs.add(new CaidaDiagonal());
+        movs.add(new CaidaZigZag());
     }
 
     public void crear() {
@@ -38,19 +46,19 @@ public class Lluvia {
     private void crearGotaDeLluvia(int ptj) {
     	int aux =MathUtils.random(1,15);
     	if (aux<12) {
-    		GotaBuena rd = new GotaBuena(MathUtils.random(-150,150), (ptj + 250), dropSound, anchoCam);
+    		GotaBuena rd = new GotaBuena(MathUtils.random(-150,150), (ptj + 250), dropSound, anchoCam, movs.get(MathUtils.random(movs.size()-1)));
     		rainDrops.add(rd);
     	}
     	else if (aux < 14){
-    		GotaMala rd = new GotaMala(MathUtils.random(-150,150), (ptj + 250), anchoCam);
+    		GotaMala rd = new GotaMala(MathUtils.random(-150,150), (ptj + 250), anchoCam, movs.get(MathUtils.random(movs.size()-1)));
     		rainDrops.add(rd);
     	}
     	else  if (aux < 15){
-    		GotaEscudo rd = new GotaEscudo(MathUtils.random(-150,150), (ptj + 250), anchoCam);
+    		GotaEscudo rd = new GotaEscudo(MathUtils.random(-150,150), (ptj + 250), anchoCam, movs.get(MathUtils.random(movs.size()-1)));
     		rainDrops.add(rd);
     	}
     	else {
-    		GotaSlow rd = new GotaSlow(MathUtils.random(-150,150), (ptj + 250), anchoCam);
+    		GotaSlow rd = new GotaSlow(MathUtils.random(-150,150), (ptj + 250), anchoCam, movs.get(MathUtils.random(movs.size()-1)));
     		rainDrops.add(rd);
     	}
         lastDropTime = TimeUtils.nanoTime();
@@ -70,7 +78,7 @@ public class Lluvia {
         	if (pj.estadoEsc() && rd.colision(pj.getShield())) {
         		rainDrops.removeIndex(i);
         	}
-        	else if (rd.colision(pj.getPj())) {
+        	else if (rd.colision(Tarro.getTarro(anchoCam))) {
         		rd.efecto(pj);
         		rainDrops.removeIndex(i);
         	}

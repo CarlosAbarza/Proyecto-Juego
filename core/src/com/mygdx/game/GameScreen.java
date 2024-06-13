@@ -29,9 +29,10 @@ public class GameScreen implements Screen {
         
         
         // load the images for the droplet and the bucket, 64x64 pixels each 	     
-        Sound hurtSound = Gdx.audio.newSound(Gdx.files.internal("hurt.ogg"));
-        pj = new Jugador(new Texture(Gdx.files.internal("bucket.png")),hurtSound, game.getCam().viewportWidth);
-
+        // Sound hurtSound = Gdx.audio.newSound(Gdx.files.internal("hurt.ogg"));
+        // pj = new Jugador(new Texture(Gdx.files.internal("bucket.png")),hurtSound, game.getCam().viewportWidth);
+        pj = Jugador.getJugador(game.getCam().viewportWidth);
+        
         // load the drop sound effect and the rain background "music" 
         /*
         Texture gota = new Texture(Gdx.files.internal("drop.png"));
@@ -46,13 +47,13 @@ public class GameScreen implements Screen {
         camera = game.getCam();
         batch = new SpriteBatch();
         // creacion del tarro
-        pj.crear();
+        // pj.crear();
 
         // creacion de la lluvia
         lluvia.crear();
     }
 
-    @Override
+	@Override
     public void render(float delta) {
         //limpia la pantalla con color azul obscuro.
         ScreenUtils.clear(0.5f, 0.5f, 0.5f, 1);
@@ -98,12 +99,15 @@ public class GameScreen implements Screen {
             // caida de la lluvia 
 	        lluvia.actualizarMovimiento(pj);
 	        
-	        if (pj.getVidas() == 0) {
-	            //actualizar HigherScore
-	            if (game.getHigherScore()<pj.getPtj())
-	                game.setHigherScore(pj.getPtj());  
+	        if (pj.getVidas() < 1) {
+	            ////actualizar HigherScore
+	            //if (game.getHigherScore()<pj.getPtj())
+	            //    game.setHigherScore(pj.getPtj());  
 	            //ir a la ventana de finde juego y destruir la actual
 	            game.setScreen(new GameOverScreen(game));
+	            //actualizar HigherScore
+	            if (game.getHigherScore()<pj.getPtj())
+	                game.setHigherScore(pj.getPtj());
 	            dispose();
             }
         }

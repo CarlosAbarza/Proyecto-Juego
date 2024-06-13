@@ -12,11 +12,12 @@ public abstract class Gota implements Dibujable{
 	protected Texture img;
 	protected Rectangle raindrop;
 	protected float anchoCam;
+	protected MovimientoGota mov;
 	
 	// temporal
 	protected boolean relentizado;
 
-	public Gota(int velX, int velY, Texture img, float anchoCam) {
+	public Gota(int velX, int velY, Texture img, float anchoCam, MovimientoGota mov) {
 		this.velX = velX;
 		this.velY = velY;
 		this.img = img;
@@ -27,6 +28,7 @@ public abstract class Gota implements Dibujable{
 		raindrop.width = 64;	
 		this.anchoCam = anchoCam;
 		relentizado = false;
+		this.mov = mov;
 		
 	}
 
@@ -35,8 +37,9 @@ public abstract class Gota implements Dibujable{
 	@Override
 	public void actualizarMov() {
 		// TODO Auto-generated method stub
-		raindrop.y -=  velY * Gdx.graphics.getDeltaTime();
-		moverX();
+		//raindrop.y -=  velY * Gdx.graphics.getDeltaTime();
+		//moverX();
+		mov.actualizarMov(velX, velY, raindrop, anchoCam);
 	}
 	
 	@Override
@@ -53,13 +56,13 @@ public abstract class Gota implements Dibujable{
 		return true;
 	}
 
-	protected void moverX() {
+	/*protected void moverX() {
 		if (raindrop.x > (anchoCam-64) ||
 			raindrop.x < 0) {
 			velX *= -1;
 		}
 		raindrop.x += velX * Gdx.graphics.getDeltaTime();
-	}
+	}*/
 	
 	@Override
 	public boolean colision(Movible pj) {

@@ -1,10 +1,12 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Jugador {
+public final class Jugador {
+	private static Jugador instance;
 	private int vidas;
 	private int ptj;
 	private Tarro pj;
@@ -13,8 +15,8 @@ public class Jugador {
 	private float slowTMax;
 	private float slowTLeft;
 	
-	public Jugador(Texture tex, Sound ss, float anchoCam) {
-		pj = new Tarro(tex, ss, anchoCam);
+	private Jugador(Texture tex, Sound ss, float anchoCam) {
+		pj = Tarro.getTarro(anchoCam);
 		vidas = 3;
 		ptj = 0;
 		slowTMax = 3f;
@@ -24,6 +26,13 @@ public class Jugador {
 		pj.crear();
 		esc.crear();
 	}
+	
+	public static Jugador getJugador(float anchoCam) {
+		if (instance == null) {
+			instance = new Jugador(new Texture(Gdx.files.internal("bucket.png")),Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")), anchoCam);
+		}
+		return instance;
+	}
 
 	public int getVidas() {
 		return vidas;
@@ -31,10 +40,6 @@ public class Jugador {
 
 	public int getPtj() {
 		return ptj;
-	}
-	
-	public Tarro getPj() {
-		return pj;
 	}
 	
 	public void crear() {
@@ -68,6 +73,8 @@ public class Jugador {
 	
 	public void destruir() {
 		pj.destruir();
+		esc.destruir();
+		instance = null;
 	}
 	
 	public void relentizar() {
