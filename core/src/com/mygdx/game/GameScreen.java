@@ -91,6 +91,7 @@ public class GameScreen implements Screen {
 	        	float deltaTime = Gdx.graphics.getDeltaTime();
 	        	pj.usarShield(deltaTime);
 	        	pj.activarEscudo();
+	        	// lluvia.relentizar();
 	        }
 	        else if (!Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) || !pj.puedeShield()) {
 	        	pj.desactivarEscudo();
