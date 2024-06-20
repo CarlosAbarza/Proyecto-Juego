@@ -135,6 +135,6 @@ public final class Jugador {
 	}
 	
 	public void recargaShield() {
-		esc.recarga();
+		esc.resetTime();
 	}
 }

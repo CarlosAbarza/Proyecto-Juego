@@ -70,7 +70,7 @@ public class Lluvia {
 
         for (int i = 0; i < rainDrops.size; i++) {
         	Gota rd = rainDrops.get(i);
-        	rd.actualizarMov();
+        	/*rd.actualizarMov();
         	if (!rd.dentroPantalla()) {
         		rainDrops.removeIndex(i);
         	}
@@ -81,6 +81,15 @@ public class Lluvia {
         	else if (rd.colision(Tarro.getTarro(anchoCam))) {
         		rd.efecto(pj);
         		rainDrops.removeIndex(i);
+        	}*/
+        	
+        	if (pj.estadoEsc() && !rd.actualizacion(pj, pj.getShield())) {
+        		rainDrops.removeIndex(i);
+        	}
+        	else {
+        		if (!rd.actualizacion(pj)) {
+        			rainDrops.removeIndex(i);
+        		}
         	}
         	
         }

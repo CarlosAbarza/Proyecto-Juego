@@ -34,6 +34,29 @@ public abstract class Gota implements Dibujable{
 
 	public abstract void efecto(Jugador pj);
 	
+	public boolean actualizacion(Jugador pj, Movible shield) {
+		actualizarMov();
+		if (!dentroPantalla()) return false;
+		if (colision(shield)) {
+			return false;
+		}
+		else if (colision(Tarro.getTarro(anchoCam))) {
+			efecto(pj);
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean actualizacion(Jugador pj) {
+		actualizarMov();
+		if (!dentroPantalla()) return false;
+		if (colision(Tarro.getTarro(anchoCam))) {
+			efecto(pj);
+			return false;
+		}
+		return true;
+	}
+	
 	@Override
 	public void actualizarMov() {
 		// TODO Auto-generated method stub
@@ -55,14 +78,6 @@ public abstract class Gota implements Dibujable{
 		}
 		return true;
 	}
-
-	/*protected void moverX() {
-		if (raindrop.x > (anchoCam-64) ||
-			raindrop.x < 0) {
-			velX *= -1;
-		}
-		raindrop.x += velX * Gdx.graphics.getDeltaTime();
-	}*/
 	
 	@Override
 	public boolean colision(Movible pj) {

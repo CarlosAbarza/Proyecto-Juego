@@ -128,10 +128,6 @@ public class Shield implements Dibujable {
 		return timeLeft > 0;
 	}
 	
-	public void recarga() {
-		timeLeft = timeMax;
-	}
-	
 	public void destruir() {
 		shieldImg.dispose();
 	}
