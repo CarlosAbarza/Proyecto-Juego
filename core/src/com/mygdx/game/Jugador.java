@@ -15,21 +15,21 @@ public final class Jugador {
 	private float slowTMax;
 	private float slowTLeft;
 	
-	private Jugador(Texture tex, Sound ss, float anchoCam) {
-		pj = Tarro.getTarro(anchoCam);
+	private Jugador(Texture tex, Sound ss) {
+		pj = Tarro.getTarro();
 		vidas = 3;
 		ptj = 0;
 		slowTMax = 3f;
 		slowTLeft = slowTMax;
-		esc = new Shield(anchoCam);
+		esc = new Shield(GameScreen.getAnchoCam());
 		
 		pj.crear();
 		esc.crear();
 	}
 	
-	public static Jugador getJugador(float anchoCam) {
+	public static Jugador getJugador() {
 		if (instance == null) {
-			instance = new Jugador(new Texture(Gdx.files.internal("bucket.png")),Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")), anchoCam);
+			instance = new Jugador(new Texture(Gdx.files.internal("bucket.png")),Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
 		}
 		return instance;
 	}

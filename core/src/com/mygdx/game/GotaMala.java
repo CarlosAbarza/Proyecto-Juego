@@ -6,8 +6,8 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class GotaMala extends Gota {
 	
-	public GotaMala(int velX, int velY, float anchoCam, MovimientoGota mov) {
-		super(velX, velY, new Texture(Gdx.files.internal("gotaRoja.png")), anchoCam, mov);
+	public GotaMala(int velX, int velY, MovimientoGota mov) {
+		super(velX, velY, new Texture(Gdx.files.internal("gotaRoja.png")), mov);
 	}
 
 	@Override

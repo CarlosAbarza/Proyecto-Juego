@@ -10,7 +10,7 @@ public class CaidaRecta extends MovimientoGota {
 	}
 	
 	@Override
-	public void actualizarX(int velX, Rectangle gota, float anchoCam) {
+	public void actualizarX(int velX, Rectangle gota) {
 		
 	}
 }

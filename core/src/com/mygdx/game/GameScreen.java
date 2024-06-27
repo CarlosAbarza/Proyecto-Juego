@@ -18,6 +18,7 @@ public class GameScreen implements Screen {
     private BitmapFont font;
     private Jugador pj;
     private Lluvia lluvia;
+    private static float anchoCam;
 
 
     //boolean activo = true;
@@ -26,12 +27,13 @@ public class GameScreen implements Screen {
         this.game = game;
         this.batch = game.getBatch();
         this.font = game.getFont();
+        anchoCam = game.getCam().viewportWidth;
         
         
         // load the images for the droplet and the bucket, 64x64 pixels each 	     
         // Sound hurtSound = Gdx.audio.newSound(Gdx.files.internal("hurt.ogg"));
         // pj = new Jugador(new Texture(Gdx.files.internal("bucket.png")),hurtSound, game.getCam().viewportWidth);
-        pj = Jugador.getJugador(game.getCam().viewportWidth);
+        pj = Jugador.getJugador();
         
         // load the drop sound effect and the rain background "music" 
         /*
@@ -41,7 +43,7 @@ public class GameScreen implements Screen {
         Sound dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
 
         Music rainMusic = Gdx.audio.newMusic(Gdx.files.internal("rain.mp3"));
-        lluvia = new Lluvia(dropSound, rainMusic, game.getCam().viewportWidth);
+        lluvia = new Lluvia(dropSound, rainMusic);
 
         // camera
         camera = game.getCam();
@@ -53,6 +55,10 @@ public class GameScreen implements Screen {
         lluvia.crear();
     }
 
+    public static float getAnchoCam() {
+    	return anchoCam;
+    }
+    
 	@Override
     public void render(float delta) {
         //limpia la pantalla con color azul obscuro.

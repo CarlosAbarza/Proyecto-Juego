@@ -3,11 +3,11 @@ package com.mygdx.game;
 import com.badlogic.gdx.math.Rectangle;
 
 public abstract class MovimientoGota {
-	public void actualizarMov(int velX, int velY, Rectangle gota, float anchoCam) {
+	public void actualizarMov(int velX, int velY, Rectangle gota) {
 		actualizarY(velY, gota);
-		actualizarX(velX, gota, anchoCam);
+		actualizarX(velX, gota);
 	}
 	
 	public abstract void actualizarY(int velY, Rectangle gota);
-	public abstract void actualizarX(int velX, Rectangle gota, float anchoCam);
+	public abstract void actualizarX(int velX, Rectangle gota);
 }

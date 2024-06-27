@@ -17,16 +17,16 @@ public abstract class Gota implements Dibujable{
 	// temporal
 	protected boolean relentizado;
 
-	public Gota(int velX, int velY, Texture img, float anchoCam, MovimientoGota mov) {
+	public Gota(int velX, int velY, Texture img, MovimientoGota mov) {
 		this.velX = velX;
 		this.velY = velY;
 		this.img = img;
 		this.raindrop = new Rectangle();
-		raindrop.x = MathUtils.random(0, anchoCam-64);
+		raindrop.x = MathUtils.random(0, GameScreen.getAnchoCam()-64);
 		raindrop.y = Gdx.graphics.getHeight();
 		raindrop.height = 64;
 		raindrop.width = 64;	
-		this.anchoCam = anchoCam;
+		this.anchoCam = GameScreen.getAnchoCam();
 		relentizado = false;
 		this.mov = mov;
 		
@@ -40,7 +40,7 @@ public abstract class Gota implements Dibujable{
 		if (colision(shield)) {
 			return false;
 		}
-		else if (colision(Tarro.getTarro(anchoCam))) {
+		else if (colision(Tarro.getTarro())) {
 			efecto(pj);
 			return false;
 		}
@@ -50,7 +50,7 @@ public abstract class Gota implements Dibujable{
 	public boolean actualizacion(Jugador pj) {
 		actualizarMov();
 		if (!dentroPantalla()) return false;
-		if (colision(Tarro.getTarro(anchoCam))) {
+		if (colision(Tarro.getTarro())) {
 			efecto(pj);
 			return false;
 		}
@@ -62,7 +62,7 @@ public abstract class Gota implements Dibujable{
 		// TODO Auto-generated method stub
 		//raindrop.y -=  velY * Gdx.graphics.getDeltaTime();
 		//moverX();
-		mov.actualizarMov(velX, velY, raindrop, anchoCam);
+		mov.actualizarMov(velX, velY, raindrop);
 	}
 	
 	@Override

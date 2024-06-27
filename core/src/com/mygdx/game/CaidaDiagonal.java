@@ -10,8 +10,8 @@ public class CaidaDiagonal extends MovimientoGota {
 	}
 	
 	@Override
-	public void actualizarX(int velX, Rectangle gota, float anchoCam) {
-		if (gota.x > (anchoCam-64) ||
+	public void actualizarX(int velX, Rectangle gota) {
+		if (gota.x > (GameScreen.getAnchoCam()-64) ||
 				gota.x < 0) {
 				velX *= -1;
 			}

@@ -24,16 +24,16 @@ public final class Tarro implements Dibujable{
     private boolean relentizado;
 
 
-    private Tarro(Texture tex, Sound ss, float anchoCam) {
+    private Tarro(Texture tex, Sound ss) {
         bucketImage = tex;
         sonidoHerido = ss;
-        this.anchoCam = anchoCam;
+        this.anchoCam = GameScreen.getAnchoCam();
         relentizado = false;
     }
     
-    public static Tarro getTarro(float anchoCam) {
+    public static Tarro getTarro() {
     	if (instance == null) {
-    		instance = new Tarro(new Texture(Gdx.files.internal("bucket.png")),Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")), anchoCam);
+    		instance = new Tarro(new Texture(Gdx.files.internal("bucket.png")),Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")));
     	}
     	return instance;
     }

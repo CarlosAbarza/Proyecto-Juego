@@ -24,10 +24,10 @@ public class Lluvia {
     private float anchoCam;
     private ArrayList<MovimientoGota> movs;
 	   
-    public Lluvia(Sound ss, Music mm, float anchoCam) {
+    public Lluvia(Sound ss, Music mm) {
         rainMusic = mm;
         dropSound = ss;
-        this.anchoCam = anchoCam;
+        this.anchoCam = GameScreen.getAnchoCam();
         
         movs = new ArrayList<>();
         movs.add(new CaidaRecta());
@@ -46,19 +46,19 @@ public class Lluvia {
     private void crearGotaDeLluvia(int ptj) {
     	int aux =MathUtils.random(1,15);
     	if (aux<12) {
-    		GotaBuena rd = new GotaBuena(MathUtils.random(-150,150), (ptj + 250), dropSound, anchoCam, movs.get(MathUtils.random(movs.size()-1)));
+    		GotaBuena rd = new GotaBuena(MathUtils.random(-150,150), (ptj + 250), dropSound, movs.get(MathUtils.random(movs.size()-1)));
     		rainDrops.add(rd);
     	}
     	else if (aux < 14){
-    		GotaMala rd = new GotaMala(MathUtils.random(-150,150), (ptj + 250), anchoCam, movs.get(MathUtils.random(movs.size()-1)));
+    		GotaMala rd = new GotaMala(MathUtils.random(-150,150), (ptj + 250), movs.get(MathUtils.random(movs.size()-1)));
     		rainDrops.add(rd);
     	}
     	else  if (aux < 15){
-    		GotaEscudo rd = new GotaEscudo(MathUtils.random(-150,150), (ptj + 250), anchoCam, movs.get(MathUtils.random(movs.size()-1)));
+    		GotaEscudo rd = new GotaEscudo(MathUtils.random(-150,150), (ptj + 250), movs.get(MathUtils.random(movs.size()-1)));
     		rainDrops.add(rd);
     	}
     	else {
-    		GotaSlow rd = new GotaSlow(MathUtils.random(-150,150), (ptj + 250), anchoCam, movs.get(MathUtils.random(movs.size()-1)));
+    		GotaSlow rd = new GotaSlow(MathUtils.random(-150,150), (ptj + 250), movs.get(MathUtils.random(movs.size()-1)));
     		rainDrops.add(rd);
     	}
         lastDropTime = TimeUtils.nanoTime();
