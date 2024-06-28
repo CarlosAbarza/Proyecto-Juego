@@ -11,7 +11,6 @@ public abstract class Gota implements Dibujable{
 	protected int velY;
 	protected Texture img;
 	protected Rectangle raindrop;
-	protected float anchoCam;
 	protected MovimientoGota mov;
 	
 	// temporal
@@ -26,7 +25,6 @@ public abstract class Gota implements Dibujable{
 		raindrop.y = Gdx.graphics.getHeight();
 		raindrop.height = 64;
 		raindrop.width = 64;	
-		this.anchoCam = GameScreen.getAnchoCam();
 		relentizado = false;
 		this.mov = mov;
 		

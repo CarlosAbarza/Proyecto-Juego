@@ -15,19 +15,13 @@ import com.badlogic.gdx.utils.TimeUtils;
 public class Lluvia {
     private Array<Gota> rainDrops;
 	private long lastDropTime;
-	/*
-    private Texture gotaBuena;
-    private Texture gotaMala;
-    */
-    private Sound dropSound;
     private Music rainMusic;
-    private float anchoCam;
     private ArrayList<MovimientoGota> movs;
-	   
-    public Lluvia(Sound ss, Music mm) {
+    private BuilderGota builder;
+    
+    
+    public Lluvia(Music mm) {
         rainMusic = mm;
-        dropSound = ss;
-        this.anchoCam = GameScreen.getAnchoCam();
         
         movs = new ArrayList<>();
         movs.add(new CaidaRecta());
@@ -37,6 +31,7 @@ public class Lluvia {
 
     public void crear() {
     	rainDrops = new Array<>();
+    	builder = new BuilderGota();
         crearGotaDeLluvia(0);
         // start the playback of the background music immediately
         rainMusic.setLooping(true);
@@ -44,21 +39,22 @@ public class Lluvia {
     }
 
     private void crearGotaDeLluvia(int ptj) {
-    	int aux =MathUtils.random(1,15);
-    	if (aux<12) {
-    		GotaBuena rd = new GotaBuena(MathUtils.random(-150,150), (ptj + 250), dropSound, movs.get(MathUtils.random(movs.size()-1)));
+    	int tipo = MathUtils.random(1,15);
+    	
+    	if (tipo<12) {
+    		GotaBuena rd = builder.setMov(movs.get(MathUtils.random(movs.size()-1))).getBuena(ptj);
     		rainDrops.add(rd);
     	}
-    	else if (aux < 14){
-    		GotaMala rd = new GotaMala(MathUtils.random(-150,150), (ptj + 250), movs.get(MathUtils.random(movs.size()-1)));
+    	else if (tipo < 14){
+    		GotaMala rd = builder.setMov(movs.get(MathUtils.random(movs.size()-1))).getMala(ptj);
     		rainDrops.add(rd);
     	}
-    	else  if (aux < 15){
-    		GotaEscudo rd = new GotaEscudo(MathUtils.random(-150,150), (ptj + 250), movs.get(MathUtils.random(movs.size()-1)));
+    	else  if (tipo < 15){
+    		GotaEscudo rd = builder.setMov(movs.get(MathUtils.random(movs.size()-1))).getEscudo(ptj);
     		rainDrops.add(rd);
     	}
     	else {
-    		GotaSlow rd = new GotaSlow(MathUtils.random(-150,150), (ptj + 250), movs.get(MathUtils.random(movs.size()-1)));
+    		GotaSlow rd = builder.setMov(movs.get(MathUtils.random(movs.size()-1))).getSlow(ptj);
     		rainDrops.add(rd);
     	}
         lastDropTime = TimeUtils.nanoTime();
@@ -117,7 +113,6 @@ public class Lluvia {
     }
     
     public void destruir() {
-        dropSound.dispose();
         rainMusic.dispose();
     }
     

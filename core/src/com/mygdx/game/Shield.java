@@ -17,11 +17,11 @@ public class Shield implements Dibujable {
 	private boolean relentizado;
 	private boolean activo;
 	
-	public Shield(float anchoCam) {
+	public Shield() {
 		shieldImg = new Texture(Gdx.files.internal("barraAzulP.png"));
 		timeMax = 3f;
 		timeLeft = timeMax;
-		this.anchoCam = anchoCam;
+		this.anchoCam = GameScreen.getAnchoCam();
 		velX = 400;
 		relentizado = false;
 		activo = false;

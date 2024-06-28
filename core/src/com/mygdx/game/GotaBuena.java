@@ -8,9 +8,9 @@ import com.badlogic.gdx.math.Rectangle;
 public class GotaBuena extends Gota {
 	private Sound dropSound;
 	
-	public GotaBuena(int velX, int velY, Sound dropSound, MovimientoGota mov) {
+	public GotaBuena(int velX, int velY, MovimientoGota mov) {
 		super(velX, velY, new Texture(Gdx.files.internal("drop.png")), mov);
-		this.dropSound = dropSound;
+		this.dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
 	}
 
 	@Override

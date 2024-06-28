@@ -21,7 +21,7 @@ public final class Jugador {
 		ptj = 0;
 		slowTMax = 3f;
 		slowTLeft = slowTMax;
-		esc = new Shield(GameScreen.getAnchoCam());
+		esc = new Shield();
 		
 		pj.crear();
 		esc.crear();

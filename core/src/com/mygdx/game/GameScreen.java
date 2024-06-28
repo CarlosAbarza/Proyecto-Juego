@@ -40,10 +40,9 @@ public class GameScreen implements Screen {
         Texture gota = new Texture(Gdx.files.internal("drop.png"));
         Texture gotaMala = new Texture(Gdx.files.internal("gotaRoja.png"));
 */
-        Sound dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
 
         Music rainMusic = Gdx.audio.newMusic(Gdx.files.internal("rain.mp3"));
-        lluvia = new Lluvia(dropSound, rainMusic);
+        lluvia = new Lluvia(rainMusic);
 
         // camera
         camera = game.getCam();
