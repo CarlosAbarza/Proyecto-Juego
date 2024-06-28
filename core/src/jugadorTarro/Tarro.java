@@ -22,16 +22,20 @@ public final class Tarro implements Dibujable{
     private int tiempoHeridoMax=50;
     private int tiempoHerido;
     private float anchoCam;
-    
+    private float tiempoRelentizadoEfec;
     // temporal
-    private boolean relentizado;
+    private boolean relentizadoHabilidad;
+    private boolean relentizadoEfec;
 
 
     private Tarro(Texture tex, Sound ss) {
         bucketImage = tex;
         sonidoHerido = ss;
         this.anchoCam = GameScreen.getAnchoCam();
-        relentizado = false;
+        relentizadoHabilidad = false;
+        relentizadoEfec = false;
+        
+        tiempoRelentizadoEfec = 0f;
     }
     
     public static Tarro getTarro() {
@@ -77,6 +81,8 @@ public final class Tarro implements Dibujable{
         //movimiento desde teclado
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) bucket.x -= velX * Gdx.graphics.getDeltaTime();
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) bucket.x += velX * Gdx.graphics.getDeltaTime();
+        
+        revisarEfecto();
         // que no se salga de los bordes izq y der
         if(!dentroPantalla()) {
         	if (bucket.x < 0) {
@@ -86,6 +92,18 @@ public final class Tarro implements Dibujable{
         		bucket.x = anchoCam - 64;
         	}
         }
+    }
+    
+    public void setEfectoSlow(float tt) {
+    	tiempoRelentizadoEfec = tt;
+    	relentizadoEfec();
+    }
+    
+    public void revisarEfecto() {
+    	tiempoRelentizadoEfec -= Gdx.graphics.getDeltaTime();
+    	if (tiempoRelentizadoEfec <= 0) {
+    		acelerarEfec();
+    	}
     }
     
     @Override
@@ -117,18 +135,31 @@ public final class Tarro implements Dibujable{
 
 	@Override
 	public void acelerar() {
-		if (relentizado) {
+		if (relentizadoHabilidad) {
 			velX *= 2;
-			relentizado = false;
+			relentizadoHabilidad = false;
 		}
 	}
 
 	@Override
 	public void relentizar() {
-		if (!relentizado) {
+		if (!relentizadoHabilidad) {
 			velX /= 2; 
-			relentizado = true;
+			relentizadoHabilidad = true;
 		}
 	}
-	   
+	
+	public void relentizadoEfec() {
+		if (!relentizadoEfec) {
+			velX /= 2;
+			relentizadoEfec = true;
+		}
+	}
+	
+	public void acelerarEfec() {
+		if (relentizadoEfec) {
+			velX *= 2;
+			relentizadoEfec = false;
+		}
+	}
 }

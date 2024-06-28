@@ -7,18 +7,19 @@ import com.badlogic.gdx.graphics.Texture;
 import jugadorTarro.Jugador;
 import movimientosGotas.MovimientoGota;
 
-public class GotaSlow extends Gota {
+public class GotaVida extends Gota {
 	private Sound sonido;
 	
-	public GotaSlow(int ptj, MovimientoGota mov) {
-		super(ptj, new Texture(Gdx.files.internal("gotaMorada.png")), mov);
-		sonido = Gdx.audio.newSound(Gdx.files.internal("sonidoSlow.mp3"));
-		// TODO Auto-generated constructor stub
+	public GotaVida(int velY, MovimientoGota mov) {
+		super(velY, new Texture(Gdx.files.internal("corazon.png")), mov);
+		sonido = Gdx.audio.newSound(Gdx.files.internal("sonidoVida.mp3"));
 	}
-
+	
+	
 	@Override
 	public void efecto(Jugador pj) {
-		pj.recargaSlow();
+		// TODO Auto-generated method stub
+		pj.curar();
 		sonido.play();
 	}
 

@@ -1,13 +1,9 @@
 package factorias;
 
-import Gotas.GotaBuena;
-import Gotas.GotaEscudo;
-import Gotas.GotaMala;
-import Gotas.GotaSlow;
+import Gotas.Gota;
 
 public interface GotaFactory {
-	public GotaBuena crearBuena(int ptj);
-	public GotaMala crearMala(int ptj);
-	public GotaEscudo crearEscudo(int ptj);
-	public GotaSlow crearSlow(int ptj);
+	public Gota crearBuena(int ptj);
+	public Gota crearMala(int ptj);
+	public Gota crearExtra(int ptj);
 }

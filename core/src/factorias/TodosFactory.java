@@ -4,10 +4,13 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.MathUtils;
 
-import Gotas.GotaBuena;
+import Gotas.Gota;
+import Gotas.GotaBuenaExt;
+import Gotas.GotaBuenaFacil;
 import Gotas.GotaEscudo;
-import Gotas.GotaMala;
+import Gotas.GotaMalaExt;
 import Gotas.GotaSlow;
+import Gotas.GotaVida;
 import movimientosGotas.CaidaDiagonal;
 import movimientosGotas.CaidaRecta;
 import movimientosGotas.CaidaZigZag;
@@ -24,7 +27,7 @@ public class TodosFactory implements GotaFactory {
 	}
 	
 	@Override
-	public GotaBuena crearBuena(int ptj) {
+	public Gota crearBuena(int ptj) {
 		int aux = MathUtils.random(0,10);
 		if (aux < 2) {
 			aux = 0;
@@ -36,11 +39,11 @@ public class TodosFactory implements GotaFactory {
 			aux = 2;
 		}
 		MovimientoGota mov = movs.get(aux);
-		return new GotaBuena(MathUtils.random(-150,150), (ptj + 250), mov);
+		return new GotaBuenaExt(ptj, mov);
 	}
 
 	@Override
-	public GotaMala crearMala(int ptj) {
+	public Gota crearMala(int ptj) {
 		int aux = MathUtils.random(0,10);
 		if (aux < 2) {
 			aux = 0;
@@ -52,11 +55,11 @@ public class TodosFactory implements GotaFactory {
 			aux = 2;
 		}
 		MovimientoGota mov = movs.get(aux);
-		return new GotaMala(MathUtils.random(-150,150), (ptj + 250), mov);
+		return new GotaMalaExt(ptj, mov);
 	}
 
 	@Override
-	public GotaEscudo crearEscudo(int ptj) {
+	public Gota crearExtra(int ptj) {
 		int aux = MathUtils.random(0,10);
 		if (aux < 2) {
 			aux = 0;
@@ -68,23 +71,13 @@ public class TodosFactory implements GotaFactory {
 			aux = 2;
 		}
 		MovimientoGota mov = movs.get(aux);
-		return new GotaEscudo(MathUtils.random(-150,150), (ptj + 250), mov);
-	}
-
-	@Override
-	public GotaSlow crearSlow(int ptj) {
-		int aux = MathUtils.random(0,10);
-		if (aux < 2) {
-			aux = 0;
-		}
-		else if (aux < 6) {
-			aux = 1;
-		}
-		else {
-			aux = 2;
-		}
-		MovimientoGota mov = movs.get(aux);
-		return new GotaSlow(MathUtils.random(-150,150), (ptj + 250), mov);
+		int tipo = MathUtils.random(0, 2);
+		if (tipo == 0)
+			return new GotaEscudo(ptj, mov);
+		else if(tipo == 1) 
+			return new GotaSlow(ptj,mov);
+		else
+			return new GotaVida(ptj,mov);
 	}
 
 }

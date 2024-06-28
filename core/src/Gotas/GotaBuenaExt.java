@@ -3,26 +3,27 @@ package Gotas;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Rectangle;
 
 import jugadorTarro.Jugador;
 import movimientosGotas.MovimientoGota;
 
-public class GotaBuena extends Gota {
+public class GotaBuenaExt extends Gota {
 	private Sound dropSound;
+	private int ptj;
 	
-	public GotaBuena(int velX, int velY, MovimientoGota mov) {
-		super(velX, velY, new Texture(Gdx.files.internal("drop.png")), mov);
+	public GotaBuenaExt(int velY, MovimientoGota mov) {
+		super(velY, new Texture(Gdx.files.internal("drop.png")), mov);
 		this.dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
+		this.ptj = 10;
 	}
-
+	
 	@Override
 	public void efecto(Jugador pj) {
-		// TODO Auto-generated method stub
-		pj.sumarPuntos(10);
+		pj.sumarPuntos(ptj);
 		dropSound.play();
+		pj.aplicarEfecto(0.25f);
 	}
-
+	
 	public Sound getDropSound() {
 		return dropSound;
 	}

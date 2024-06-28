@@ -13,9 +13,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
 import Gotas.Gota;
-import Gotas.GotaBuena;
+import Gotas.GotaBuenaFacil;
 import Gotas.GotaEscudo;
-import Gotas.GotaMala;
 import Gotas.GotaSlow;
 import factorias.GotaFactory;
 import jugadorTarro.Jugador;
@@ -48,19 +47,15 @@ public class Lluvia {
     	int tipo = MathUtils.random(1,15);
     	
     	if (tipo<12) {
-    		GotaBuena rd = factory.crearBuena(ptj);
+    		Gota rd = factory.crearBuena(ptj);
     		rainDrops.add(rd);
     	}
     	else if (tipo < 14){
-    		GotaMala rd = factory.crearMala(ptj);
-    		rainDrops.add(rd);
-    	}
-    	else  if (tipo < 15){
-    		GotaEscudo rd = factory.crearEscudo(ptj);
+    		Gota rd = factory.crearMala(ptj);
     		rainDrops.add(rd);
     	}
     	else {
-    		GotaSlow rd = factory.crearSlow(ptj);
+    		Gota rd = factory.crearExtra(ptj);
     		rainDrops.add(rd);
     	}
         lastDropTime = TimeUtils.nanoTime();

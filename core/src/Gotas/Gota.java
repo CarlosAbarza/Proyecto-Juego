@@ -23,9 +23,9 @@ public abstract class Gota implements Dibujable{
 	// temporal
 	protected boolean relentizado;
 
-	public Gota(int velX, int velY, Texture img, MovimientoGota mov) {
-		this.velX = velX;
-		this.velY = velY;
+	public Gota(int ptj, Texture img, MovimientoGota mov) {
+		this.velX = MathUtils.random(-150,150);
+		this.velY = ptj + 250;
 		this.img = img;
 		this.raindrop = new Rectangle();
 		raindrop.x = MathUtils.random(0, GameScreen.getAnchoCam()-64);

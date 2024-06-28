@@ -50,9 +50,13 @@ public final class Jugador {
 		ptj += pp;
 	}
 	
-	public void dañar() {
-		vidas--;
+	public void dañar(int damage) {
+		vidas -= damage;
 		pj.dañar();
+	}
+	
+	public void curar() {
+		vidas++;
 	}
 	 
 	public boolean estaHerido() {
@@ -136,5 +140,9 @@ public final class Jugador {
 	
 	public void recargaShield() {
 		esc.resetTime();
+	}
+	
+	public void aplicarEfecto(float tt) {
+		pj.setEfectoSlow(tt);
 	}
 }

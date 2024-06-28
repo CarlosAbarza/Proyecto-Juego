@@ -1,11 +1,9 @@
 package factorias;
 
-import com.badlogic.gdx.math.MathUtils;
-
-import Gotas.GotaBuena;
+import Gotas.Gota;
+import Gotas.GotaBuenaFacil;
 import Gotas.GotaEscudo;
-import Gotas.GotaMala;
-import Gotas.GotaSlow;
+import Gotas.GotaMalaFacil;
 import movimientosGotas.CaidaRecta;
 import movimientosGotas.MovimientoGota;
 
@@ -17,23 +15,18 @@ public class FacilFactory implements GotaFactory {
 	}
 	
 	@Override
-	public GotaBuena crearBuena(int ptj) {
-		return new GotaBuena(MathUtils.random(-150,150), (ptj + 250), mov);
+	public Gota crearBuena(int ptj) {
+		return new GotaBuenaFacil(ptj, mov);
 	}
 
 	@Override
-	public GotaMala crearMala(int ptj) {
-		return new GotaMala(MathUtils.random(-150,150), (ptj + 250), mov);
+	public Gota crearMala(int ptj) {
+		return new GotaMalaFacil(ptj, mov);
 	}
 
 	@Override
-	public GotaEscudo crearEscudo(int ptj) {
-		return new GotaEscudo(MathUtils.random(-150,150), (ptj + 250), mov);
-	}
-
-	@Override
-	public GotaSlow crearSlow(int ptj) {
-		return new GotaSlow(MathUtils.random(-150,150), (ptj + 250), mov);
+	public Gota crearExtra(int ptj) {
+		return new GotaEscudo(ptj, mov);
 	}
 
 }

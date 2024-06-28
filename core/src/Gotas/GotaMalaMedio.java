@@ -7,16 +7,16 @@ import com.badlogic.gdx.math.Rectangle;
 import jugadorTarro.Jugador;
 import movimientosGotas.MovimientoGota;
 
-public class GotaMala extends Gota {
+public class GotaMalaMedio extends Gota {
 	
-	public GotaMala(int velX, int velY, MovimientoGota mov) {
-		super(velX, velY, new Texture(Gdx.files.internal("gotaRoja.png")), mov);
+	public GotaMalaMedio(int ptj, MovimientoGota mov) {
+		super(ptj, new Texture(Gdx.files.internal("gotaRoja.png")), mov);
 	}
 
 	@Override
 	public void efecto(Jugador pj) {
 		// TODO Auto-generated method stub
-		pj.dañar();
+		pj.dañar(1);
 	}
 
 }
