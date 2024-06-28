@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package movimientosGotas;
 
 import com.badlogic.gdx.math.Rectangle;
 

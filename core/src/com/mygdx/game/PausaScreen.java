@@ -15,13 +15,15 @@ public class PausaScreen implements Screen {
     private SpriteBatch batch;	   
     private BitmapFont font;
     private OrthographicCamera camera;
+    private int ptj;
 
-    public PausaScreen (final MyGdxGame game, GameScreen juego) {
+    public PausaScreen (final MyGdxGame game, GameScreen juego, int ptj) {
         this.game = game;
         this.juego = juego;
         this.batch = game.getBatch();
         this.font = game.getFont();
         camera = game.getCam();
+        this.ptj = ptj;
     }
 
     @Override
@@ -34,6 +36,7 @@ public class PausaScreen implements Screen {
         batch.begin();
         font.draw(batch, "Juego en Pausa ", 100, 150);
         font.draw(batch, "Toca en cualquier lado para continuar !!!", 100, 100);
+        font.draw(batch, "Gotas totales: " + ptj, 100, 50);
         batch.end();
 
         if (Gdx.input.isTouched()) {

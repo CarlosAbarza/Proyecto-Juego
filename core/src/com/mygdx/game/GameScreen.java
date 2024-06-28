@@ -11,6 +11,13 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import factorias.DificilFactory;
+import factorias.FacilFactory;
+import factorias.GotaFactory;
+import factorias.MedioFactory;
+import factorias.TodosFactory;
+import jugadorTarro.Jugador;
+
 public class GameScreen implements Screen {
     final MyGdxGame game;
     private OrthographicCamera camera;
@@ -19,6 +26,9 @@ public class GameScreen implements Screen {
     private Jugador pj;
     private Lluvia lluvia;
     private static float anchoCam;
+    
+    private GotaFactory fabricaGotas;
+    private int nivel;
 
 
     //boolean activo = true;
@@ -29,20 +39,12 @@ public class GameScreen implements Screen {
         this.font = game.getFont();
         anchoCam = game.getCam().viewportWidth;
         
-        
-        // load the images for the droplet and the bucket, 64x64 pixels each 	     
-        // Sound hurtSound = Gdx.audio.newSound(Gdx.files.internal("hurt.ogg"));
-        // pj = new Jugador(new Texture(Gdx.files.internal("bucket.png")),hurtSound, game.getCam().viewportWidth);
         pj = Jugador.getJugador();
-        
-        // load the drop sound effect and the rain background "music" 
-        /*
-        Texture gota = new Texture(Gdx.files.internal("drop.png"));
-        Texture gotaMala = new Texture(Gdx.files.internal("gotaRoja.png"));
-*/
 
         Music rainMusic = Gdx.audio.newMusic(Gdx.files.internal("rain.mp3"));
-        lluvia = new Lluvia(rainMusic);
+        fabricaGotas = new FacilFactory();
+        lluvia = new Lluvia(rainMusic, fabricaGotas);
+        nivel = 0;
 
         // camera
         camera = game.getCam();
@@ -76,6 +78,24 @@ public class GameScreen implements Screen {
 
         
         if (!pj.estaHerido()) {
+        	if (nivel == 0 && pj.getPtj() >= 250) {
+        		fabricaGotas = new MedioFactory();
+        		lluvia.setFactory(fabricaGotas);
+        		nivel += 1;
+        	}
+        	
+        	if (nivel == 1 && pj.getPtj() >= 500) {
+        		fabricaGotas = new DificilFactory();
+        		lluvia.setFactory(fabricaGotas);
+        		nivel += 1;
+        	}
+        	
+        	if (nivel == 2 && pj.getPtj() >= 750) {
+        		fabricaGotas = new TodosFactory();
+        		lluvia.setFactory(fabricaGotas);
+        		nivel += 1;
+        	}
+        	
             // movimiento del tarro desde teclado
             pj.mover();    
             
@@ -84,7 +104,7 @@ public class GameScreen implements Screen {
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && pj.puedeSlow()) {
 	        	float deltaTime = Gdx.graphics.getDeltaTime();
 	        	pj.tiempoSlow(deltaTime);
-	        	pj.relentizar();
+//	        	pj.relentizar();
 	        	lluvia.relentizar();
 	        }
 	        else if (!Gdx.input.isKeyPressed(Input.Keys.SPACE) ||  !pj.puedeSlow()) {
@@ -142,7 +162,7 @@ public class GameScreen implements Screen {
     @Override
     public void pause() {
         lluvia.pausar();
-        game.setScreen(new PausaScreen(game, this)); 
+        game.setScreen(new PausaScreen(game, this, pj.getPtj())); 
     }
 
     @Override

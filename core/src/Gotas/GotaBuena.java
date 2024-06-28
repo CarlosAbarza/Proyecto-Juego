@@ -1,9 +1,12 @@
-package com.mygdx.game;
+package Gotas;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
+
+import jugadorTarro.Jugador;
+import movimientosGotas.MovimientoGota;
 
 public class GotaBuena extends Gota {
 	private Sound dropSound;

@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package jugadorTarro;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -7,6 +7,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.Dibujable;
+import com.mygdx.game.GameScreen;
+import com.mygdx.game.Movible;
 
 
 public final class Tarro implements Dibujable{

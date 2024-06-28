@@ -12,49 +12,55 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
+import Gotas.Gota;
+import Gotas.GotaBuena;
+import Gotas.GotaEscudo;
+import Gotas.GotaMala;
+import Gotas.GotaSlow;
+import factorias.GotaFactory;
+import jugadorTarro.Jugador;
+
 public class Lluvia {
     private Array<Gota> rainDrops;
 	private long lastDropTime;
     private Music rainMusic;
-    private ArrayList<MovimientoGota> movs;
-    private BuilderGota builder;
+    private GotaFactory factory;
     
     
-    public Lluvia(Music mm) {
+    public Lluvia(Music mm, GotaFactory gf) {
         rainMusic = mm;
-        
-        movs = new ArrayList<>();
-        movs.add(new CaidaRecta());
-        movs.add(new CaidaDiagonal());
-        movs.add(new CaidaZigZag());
+        factory = gf;
     }
 
     public void crear() {
     	rainDrops = new Array<>();
-    	builder = new BuilderGota();
         crearGotaDeLluvia(0);
         // start the playback of the background music immediately
         rainMusic.setLooping(true);
         rainMusic.play();
     }
 
+    public void setFactory(GotaFactory gf) {
+    	factory = gf;
+    }
+    
     private void crearGotaDeLluvia(int ptj) {
     	int tipo = MathUtils.random(1,15);
     	
     	if (tipo<12) {
-    		GotaBuena rd = builder.setMov(movs.get(MathUtils.random(movs.size()-1))).getBuena(ptj);
+    		GotaBuena rd = factory.crearBuena(ptj);
     		rainDrops.add(rd);
     	}
     	else if (tipo < 14){
-    		GotaMala rd = builder.setMov(movs.get(MathUtils.random(movs.size()-1))).getMala(ptj);
+    		GotaMala rd = factory.crearMala(ptj);
     		rainDrops.add(rd);
     	}
     	else  if (tipo < 15){
-    		GotaEscudo rd = builder.setMov(movs.get(MathUtils.random(movs.size()-1))).getEscudo(ptj);
+    		GotaEscudo rd = factory.crearEscudo(ptj);
     		rainDrops.add(rd);
     	}
     	else {
-    		GotaSlow rd = builder.setMov(movs.get(MathUtils.random(movs.size()-1))).getSlow(ptj);
+    		GotaSlow rd = factory.crearSlow(ptj);
     		rainDrops.add(rd);
     	}
         lastDropTime = TimeUtils.nanoTime();
@@ -66,21 +72,11 @@ public class Lluvia {
 
         for (int i = 0; i < rainDrops.size; i++) {
         	Gota rd = rainDrops.get(i);
-        	/*rd.actualizarMov();
-        	if (!rd.dentroPantalla()) {
-        		rainDrops.removeIndex(i);
-        	}
         	
-        	if (pj.estadoEsc() && rd.colision(pj.getShield())) {
-        		rainDrops.removeIndex(i);
-        	}
-        	else if (rd.colision(Tarro.getTarro(anchoCam))) {
-        		rd.efecto(pj);
-        		rainDrops.removeIndex(i);
-        	}*/
-        	
-        	if (pj.estadoEsc() && !rd.actualizacion(pj, pj.getShield())) {
-        		rainDrops.removeIndex(i);
+        	if (pj.estadoEsc()) {
+        		if (!rd.actualizacion(pj, pj.getShield())) {
+        			rainDrops.removeIndex(i);
+        		}
         	}
         	else {
         		if (!rd.actualizacion(pj)) {

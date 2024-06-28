@@ -1,7 +1,10 @@
-package com.mygdx.game;
+package Gotas;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+
+import jugadorTarro.Jugador;
+import movimientosGotas.MovimientoGota;
 
 public class GotaEscudo extends Gota {
 

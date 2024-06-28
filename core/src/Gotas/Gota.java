@@ -1,10 +1,17 @@
-package com.mygdx.game;
+package Gotas;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.Dibujable;
+import com.mygdx.game.GameScreen;
+import com.mygdx.game.Movible;
+
+import jugadorTarro.Jugador;
+import jugadorTarro.Tarro;
+import movimientosGotas.MovimientoGota;
 
 public abstract class Gota implements Dibujable{
 	protected int velX;

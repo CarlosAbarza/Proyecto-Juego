@@ -1,7 +1,8 @@
-package com.mygdx.game;
+package movimientosGotas;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.GameScreen;
 
 public class CaidaDiagonal extends MovimientoGota {
 	@Override
